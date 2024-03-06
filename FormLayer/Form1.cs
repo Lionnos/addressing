@@ -14,6 +14,14 @@ namespace FormLayer
             string ip = textBoxIP.Text;
             Classification classification = new Classification(ip);
             labelResult.Text = classification.ToStringValues();
+            //textBoxIP.Text = "";
+
+            int amount = int.Parse(textBoxSubnet.Text);
+            if (amount >= 2)
+            {
+                Subnets subnets = new Subnets(amount);
+                labelResultSubnet.Text = subnets.ToStringValues();
+            }
         }
     }
 }
