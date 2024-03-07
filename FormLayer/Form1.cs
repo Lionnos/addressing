@@ -16,12 +16,26 @@ namespace FormLayer
             labelResult.Text = classification.ToStringValues();
             //textBoxIP.Text = "";
 
-            int amount = int.Parse(textBoxSubnet.Text);
-            if (amount >= 2)
+            int amount;
+
+            if (!string.IsNullOrEmpty(textBoxSubnet.Text))
             {
-                Subnets subnets = new Subnets(amount);
-                labelResultSubnet.Text = subnets.ToStringValues();
+                amount = int.Parse(textBoxSubnet.Text);
+                if (amount >= 2)
+                {
+                    Subnets subnets = new Subnets(amount);
+                    labelResultSubnet.Text = subnets.ToStringValues();
+                }
+                else
+                {
+                    labelResultSubnet.Text = "Número tiene ques ser mayor a 1";
+                }
             }
+            else
+            {
+                labelResultSubnet.Text = "Número invalido.";
+            }
+
         }
     }
 }

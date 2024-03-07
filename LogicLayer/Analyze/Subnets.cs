@@ -139,7 +139,6 @@ namespace LogicLayer.Analyze
                     $"Mascara de la subred: {(subnetwork.mask != null ? subnetwork.mask.ToString() : "")}\n" +
                     $"Mascara de la subred en bits: {(subnetwork.bitsMask != null ? subnetwork.bitsMask.ToString() : "")}\n" +
                     $"Saltos en subred: {(subnetwork.jumps != null ? subnetwork.jumps: "")}";
-
                 return message;
             }
             else
