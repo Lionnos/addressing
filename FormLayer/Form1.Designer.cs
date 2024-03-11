@@ -35,13 +35,16 @@
             label1 = new Label();
             label2 = new Label();
             labelResultSubnet = new Label();
+            dataGridView = new DataGridView();
+            label3 = new Label();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
             // labelResult
             // 
             labelResult.AutoSize = true;
             labelResult.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelResult.Location = new Point(44, 93);
+            labelResult.Location = new Point(50, 93);
             labelResult.Name = "labelResult";
             labelResult.Size = new Size(79, 21);
             labelResult.TabIndex = 0;
@@ -51,7 +54,7 @@
             // 
             buttonAnalyze.BackColor = SystemColors.ActiveBorder;
             buttonAnalyze.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonAnalyze.Location = new Point(608, 44);
+            buttonAnalyze.Location = new Point(384, 45);
             buttonAnalyze.Name = "buttonAnalyze";
             buttonAnalyze.Size = new Size(91, 29);
             buttonAnalyze.TabIndex = 1;
@@ -70,7 +73,7 @@
             // textBoxSubnet
             // 
             textBoxSubnet.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBoxSubnet.Location = new Point(484, 45);
+            textBoxSubnet.Location = new Point(151, 377);
             textBoxSubnet.Name = "textBoxSubnet";
             textBoxSubnet.Size = new Size(69, 29);
             textBoxSubnet.TabIndex = 3;
@@ -89,7 +92,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(396, 48);
+            label2.Location = new Point(50, 380);
             label2.Name = "label2";
             label2.Size = new Size(82, 21);
             label2.TabIndex = 5;
@@ -99,17 +102,39 @@
             // 
             labelResultSubnet.AutoSize = true;
             labelResultSubnet.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelResultSubnet.Location = new Point(399, 93);
+            labelResultSubnet.Location = new Point(50, 412);
             labelResultSubnet.Name = "labelResultSubnet";
             labelResultSubnet.Size = new Size(79, 21);
             labelResultSubnet.TabIndex = 6;
             labelResultSubnet.Text = "Resultado";
             // 
+            // dataGridView
+            // 
+            dataGridView.BackgroundColor = SystemColors.WindowFrame;
+            dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView.Location = new Point(591, 93);
+            dataGridView.Name = "dataGridView";
+            dataGridView.Size = new Size(602, 621);
+            dataGridView.TabIndex = 7;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(1071, 764);
+            label3.Name = "label3";
+            label3.Size = new Size(143, 21);
+            label3.TabIndex = 8;
+            label3.Text = "Copyright ©Lionos";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = SystemColors.WindowFrame;
+            ClientSize = new Size(1226, 794);
+            Controls.Add(label3);
+            Controls.Add(dataGridView);
             Controls.Add(labelResultSubnet);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -118,7 +143,8 @@
             Controls.Add(buttonAnalyze);
             Controls.Add(labelResult);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Direccionamiento IP";
+            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -132,5 +158,7 @@
         private Label label1;
         private Label label2;
         private Label labelResultSubnet;
+        private DataGridView dataGridView;
+        private Label label3;
     }
 }

@@ -1,6 +1,5 @@
 ﻿using LogicLayer.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace LogicLayer.Analyze
 {
@@ -59,7 +58,8 @@ namespace LogicLayer.Analyze
                 case "A":
                     network = new() {
                         ipClass = classType,
-                        networkMask = new Address() { w = 255, x = 0, y = 0, z = 0 },
+                        Mask = new Address() { w = 255, x = 0, y = 0, z = 0 },
+                        CIDR = 8,
                         networkId = new Address() { w = address?.w },
                         hostId = new Address() { x = address?.x, y = address?.y, z = address?.z},
                         networkIp = new Address() { w = address?.w, x = 0, y = 0, z = 0 },
@@ -76,7 +76,8 @@ namespace LogicLayer.Analyze
                     network = new()
                     {
                         ipClass = classType,
-                        networkMask = new Address() { w = 255, x = 255, y = 0, z = 0 },
+                        Mask = new Address() { w = 255, x = 255, y = 0, z = 0 },
+                        CIDR = 16,
                         networkId = new Address() { w = address?.w, x = address?.x },
                         hostId = new Address() { y = address?.y, z = address?.z },
                         networkIp = new Address() { w = address?.w, x = address?.x, y = 0, z = 0 },
@@ -93,7 +94,8 @@ namespace LogicLayer.Analyze
                     network = new()
                     {
                         ipClass = classType,
-                        networkMask = new Address() { w = 255, x = 255, y = 255, z = 0 },
+                        Mask = new Address() { w = 255, x = 255, y = 255, z = 0 },
+                        CIDR = 24,
                         networkId = new Address() { w = address?.w, x = address?.x, y = address?.y },
                         hostId = new Address() { z = address?.z },
                         networkIp = new Address() { w = address?.w, x = address?.x, y = address?.y, z = 0 },
@@ -140,7 +142,7 @@ namespace LogicLayer.Analyze
             {
                 string message =
                     $"Clase de IP: {network.ipClass}\n" +
-                    $"Mascara de red: {(network.networkMask != null ? network.networkMask.ToString() : "No definido")}\n" +
+                    $"Mascara de red: {(network.Mask != null ? network.Mask.ToString() +" / "+ network.CIDR : "No definido")}\n" +
                     $"ID de red: {(network.networkId != null ? network.networkId.ToString() : "No definido")}\n" +
                     $"ID de host: {(network.hostId != null ? network.hostId.ToString() : "No definido")}\n" +
                     $"IP de red: {(network.networkIp != null ? network.networkIp.ToString() : "No definido")}\n" +
@@ -197,7 +199,7 @@ namespace LogicLayer.Analyze
                 json = JsonSerializer.Serialize(new
                 {
                     ipClass = network.ipClass,
-                    networkMask = network.networkMask?.ToString(),
+                    networkMask = network.Mask?.ToString(),
                     networkId = network.networkId?.ToString(),
                     hostId = network.hostId?.ToString(),
                     networkIp = network.networkIp?.ToString(),

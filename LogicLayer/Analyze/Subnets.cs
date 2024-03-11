@@ -1,7 +1,5 @@
 ﻿
 using LogicLayer.Generic;
-using System.Net;
-using System.Threading.Tasks;
 
 namespace LogicLayer.Analyze
 {
@@ -18,7 +16,7 @@ namespace LogicLayer.Analyze
         Address fathermask = new Address { w = 0, x = 0, y = 0, z = 0 };
         Address submask = new Address { w = 0, x = 0, y = 0, z = 0 };
         AddressBits addressBits = new AddressBits { w = "", x ="", y ="", z ="" };
-        private int ones = 0;
+        private int? ones;
         private int jumps = 0;
 
         public Subnets(int numberSubnets)
@@ -39,21 +37,21 @@ namespace LogicLayer.Analyze
             while (numbersubnets < numberSubnetInput)
             {
                 bits++;
-                numbersubnets = (int) Math.Pow(2, bits) - 2;
+                numbersubnets = (int)Math.Pow(2, bits) - 2;
             }
 
             switch (network?.ipClass)
             {
-                case "A": numberips = (int) Math.Pow(2, (24 - bits)); break;
-                case "B": numberips = (int) Math.Pow(2, (16 - bits)); break;
-                case "C": numberips = (int) Math.Pow(2, (8 - bits)); break;
+                case "A": numberips = (int)Math.Pow(2, (24 - bits)); break;
+                case "B": numberips = (int)Math.Pow(2, (16 - bits)); break;
+                case "C": numberips = (int)Math.Pow(2, (8 - bits)); break;
             }
         }
 
 
         private void CalculateBitsMask()
         {
-            fathermask = network?.networkMask;
+            fathermask = network.Mask;
             addressBits = transformation.DecimalToBinaryVector(fathermask);
 
             switch (network?.ipClass)
@@ -100,10 +98,10 @@ namespace LogicLayer.Analyze
             submask = transformation.BinaryToDecimalVector(addressBits);
             AddressBits value = addressBits;
 
-            ones = transformation.CountOnes(value.w) +
-             transformation.CountOnes(value.x) +
-             transformation.CountOnes(value.y) +
-             transformation.CountOnes(value.z);
+                 ones = (transformation.CountOnes(value.w) +
+                 transformation.CountOnes(value.x) +
+                 transformation.CountOnes(value.y) +
+                 transformation.CountOnes(value.z));
 
             jumps = 256 / (numbersubnets + 2);
         }
@@ -120,9 +118,12 @@ namespace LogicLayer.Analyze
                 numberIps = numberips,
                 numberIpsUsable = numberips - 2,
                 mask = submask,
+                CIDR = ones,
                 bitsMask = addressBits,
                 jumps = jumps
             };
+
+            VarGeneric.varsubnetwork = subnetwork;
         }
 
         public string ToStringValues()
@@ -136,9 +137,10 @@ namespace LogicLayer.Analyze
                     $"Nro total de subredes utilizables: {(subnetwork.numberUsable != null ? subnetwork.numberUsable : "")}\n" +
                     $"Nro total de ips por subred: {(subnetwork.numberIps != null ? subnetwork.numberIps : "")}\n" +
                     $"Nro total de ips por subred utilizables: {(subnetwork.numberIpsUsable != null ? subnetwork.numberIpsUsable : "")}\n" +
-                    $"Mascara de la subred: {(subnetwork.mask != null ? subnetwork.mask.ToString() : "")}\n" +
+                    $"Mascara de la subred: {(subnetwork.mask != null ? subnetwork.mask.ToString() +" / "+ subnetwork.CIDR : "")}\n" +
                     $"Mascara de la subred en bits: {(subnetwork.bitsMask != null ? subnetwork.bitsMask.ToString() : "")}\n" +
                     $"Saltos en subred: {(subnetwork.jumps != null ? subnetwork.jumps: "")}";
+
                 return message;
             }
             else

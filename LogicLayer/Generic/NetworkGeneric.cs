@@ -4,7 +4,8 @@ namespace LogicLayer.Generic
     public class Network
     {
         public string? ipClass { get; set; }       // Clase
-        public Address? networkMask { get; set; }  // mascara de red
+        public Address? Mask { get; set; }         // mascara de red
+        public int? CIDR { get; set; }             // "Classless Inter-Domain Routing" (Enrutamiento Interdominio sin Clases).
         public Address? networkId { get; set; }    // id de red
         public Address? hostId { get; set; }       // id de host
         public Address? networkIp { get; set; }    // ip de red
@@ -25,9 +26,10 @@ namespace LogicLayer.Generic
         public int? number { get; set; }           // numero de subredes
         public int? numberUsable { get; set; }     // numero de subredes utilizables
         public int? numberIps { get; set; }        // numero de ips por subred
-        public int? numberIpsUsable { get; set; } // numero de ips por subred utilizables
+        public int? numberIpsUsable { get; set; }  // numero de ips por subred utilizables
         public Address? mask { get; set; }         // mascara de la subred
-        public AddressBits? bitsMask { get; set; }// mascara de la subred en bits
+        public int? CIDR { get; set; }
+        public AddressBits? bitsMask { get; set; } // mascara de la subred en bits
         public int? jumps { get; set; }            // saltos
     }
 }
