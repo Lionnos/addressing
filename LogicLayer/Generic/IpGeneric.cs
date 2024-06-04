@@ -15,7 +15,7 @@ namespace LogicLayer.Generic
     }
 
 
-    public class AddresssBits
+    public class AddressBits
     {
         public string? w { get; set; }
         public string? x { get; set; }
