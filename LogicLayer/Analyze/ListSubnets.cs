@@ -32,11 +32,41 @@ namespace LogicLayer.Analyze
         {
             switch(network?.ipClass)
             {
-                case "A": break; 
+                case "A": matrixA(); break; 
                 case "B": matrixB(); break; 
                 case "C": matrixC(); break;
             }
             return address;
+        }
+        private void matrixA()
+        {
+            address = new Address[row][];
+            Address? value = subNetwork?.ipNetwork;
+
+            for (int i = 0; i < row; i++)
+            {
+                address[i] = new Address[4];
+                address[i][0] = value;
+                value = new Address { w = value?.w, x = value?.x + jump, y = value?.y, z = value?.z };
+            }
+
+            for (int i = 0; i < row; i++)
+            {
+                Address? j = address[i][0];
+                address[i][1] = new Address { w = j.w, x = j.x, y = j.y, z = j.z + 1 };
+            }
+
+            for (int i = 0; i < row; i++)
+            {
+                Address? j = address[i][0];
+                address[i][2] = new Address { w = j.w, x = j.x + jump - 1, y = j.y, z = 254 };
+            }
+
+            for (int i = 0; i < row; i++)
+            {
+                Address? j = address[i][0];
+                address[i][3] = new Address { w = j.w, x = j.x + jump - 1, y = j.y, z = 255 };
+            }
         }
 
         private void matrixB()
@@ -59,7 +89,7 @@ namespace LogicLayer.Analyze
             for (int i = 0; i < row; i++)
             {
                 Address? j = address[i][0];
-                address[i][3] = new Address { w = j.w, x = j.x, y = j.y + jump, z = 254 };
+                address[i][2] = new Address { w = j.w, x = j.x, y = j.y + jump - 1, z = 254 };
             }
 
             for (int i = 0; i < row; i++)
